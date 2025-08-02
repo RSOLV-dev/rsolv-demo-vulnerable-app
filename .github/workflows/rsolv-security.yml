@@ -1,0 +1,42 @@
+name: RSOLV Security Automation
+
+on:
+  # Weekly security scan
+  schedule:
+    - cron: '0 0 * * 1'
+  
+  # Manual trigger for demo
+  workflow_dispatch:
+  
+  # Autofix when issue is labeled
+  issues:
+    types: [labeled]
+
+jobs:
+  security-scan:
+    if: github.event_name != 'issues'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: RSOLV Security Scan
+        uses: RSOLV-dev/rsolv-action@v2
+        with:
+          api_key: ${{ secrets.RSOLV_API_KEY }}
+          scan_mode: scan
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  autofix:
+    if: github.event_name == 'issues' && github.event.label.name == 'rsolv:automate'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: RSOLV AutoFix
+        uses: RSOLV-dev/rsolv-action@v2
+        with:
+          api_key: ${{ secrets.RSOLV_API_KEY }}
+          issue_number: ${{ github.event.issue.number }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
