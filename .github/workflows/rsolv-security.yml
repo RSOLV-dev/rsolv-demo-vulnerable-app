@@ -47,7 +47,7 @@ jobs:
           api_key: ${{ secrets.RSOLV_API_KEY }}
           issue_number: ${{ github.event.issue.number }}
           scan_mode: fix  # Explicitly set to fix mode
-          use_git_based_editing: 'true'  # Re-enable git-based editing with fixed workspace access
+          use_git_based_editing: 'true'  # Use git-based editing as per ADR-012
           max_issues: '1'  # Process only the triggered issue
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
