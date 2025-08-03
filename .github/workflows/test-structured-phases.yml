@@ -1,0 +1,45 @@
+name: Test Structured Phases v2.2.1
+
+on:
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: 'Issue number to fix'
+        required: true
+        type: string
+
+permissions:
+  issues: write
+  contents: write
+  pull-requests: write
+
+jobs:
+  test-autofix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: RSOLV AutoFix with Structured Phases
+        uses: dylanfitzgerald/RSOLV-action@v2.2.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          linear_api_key: ${{ secrets.LINEAR_API_KEY }}
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          openrouter_api_key: ${{ secrets.OPENROUTER_API_KEY }}
+          openai_api_key: ${{ secrets.OPENAI_API_KEY }}
+          rsolv_api_key: ${{ secrets.RSOLV_API_KEY }}
+          issue_number: ${{ inputs.issue_number }}
+          scan_mode: fix
+          auto_fix: true
+          auto_pr: true
+          use_vended_credentials: 'true'
+          use_claude_code: 'true'
+          use_git_based_editing: 'true'
+          # use_structured_phases is now true by default in v2.2.1
+          verbose_logging: 'true'
+          enhanced_context: 'true'
+          ultra_think: 'true'
+          test_generation: 'true'
+          test_validation: 'true'
