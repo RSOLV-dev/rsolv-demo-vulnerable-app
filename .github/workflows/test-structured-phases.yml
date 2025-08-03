@@ -1,4 +1,4 @@
-name: Test Structured Phases v2.2.1
+name: Test Structured Phases v2.2.2
 
 on:
   workflow_dispatch:
@@ -21,14 +21,14 @@ jobs:
         with:
           fetch-depth: 0
       
-      - name: RSOLV AutoFix with Structured Phases v2.2.1
-        uses: RSOLV-dev/rsolv-action@v2.2.1
+      - name: RSOLV AutoFix with Structured Phases v2.2.2
+        uses: RSOLV-dev/rsolv-action@v2.2.2
         with:
           api_key: ${{ secrets.RSOLV_API_KEY }}
           issue_number: ${{ inputs.issue_number }}
           scan_mode: fix
           use_git_based_editing: 'true'
-          # use_structured_phases defaults to true in v2.2.1
+          # use_structured_phases defaults to true in v2.2.2 (fixed config validation)
           # Explicitly set to true to be clear
           use_structured_phases: 'true'
           enable_enhanced_context: 'true'
