@@ -27,13 +27,13 @@ jobs:
           api_key: ${{ secrets.RSOLV_API_KEY }}
           issue_number: ${{ inputs.issue_number }}
           scan_mode: fix
-          # All of these now default to the right values:
+          # All of these now have intelligent defaults:
           # use_git_based_editing: defaults to 'true' (ADR-012)
           # use_structured_phases: defaults to 'true' (ADR-019)
           # enable_ast_validation: defaults to 'true'
-          # max_issues: defaults to '1' when issue_number is provided
+          # max_issues: defaults to '1'
           
-          # Only enable_enhanced_context needs to be set (defaults to 'false')
+          # Only enable_enhanced_context needs explicit setting (defaults to 'false')
           enable_enhanced_context: 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
