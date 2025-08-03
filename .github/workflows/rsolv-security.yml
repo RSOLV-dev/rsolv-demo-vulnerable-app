@@ -47,6 +47,7 @@ jobs:
           api_key: ${{ secrets.RSOLV_API_KEY }}
           issue_number: ${{ github.event.issue.number }}
           scan_mode: fix  # Explicitly set to fix mode
+          use_git_based_editing: 'false'  # Disable git-based editing due to Docker container limitations
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RSOLV_API_URL: https://api.rsolv-staging.com
