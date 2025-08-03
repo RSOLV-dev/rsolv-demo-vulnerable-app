@@ -24,7 +24,7 @@ jobs:
         with:
           api_key: ${{ secrets.RSOLV_API_KEY }}
           scan_mode: scan
-          api_endpoint: https://api.rsolv-staging.com
+          api_url: https://api.rsolv-staging.com
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -39,6 +39,6 @@ jobs:
         with:
           api_key: ${{ secrets.RSOLV_API_KEY }}
           issue_number: ${{ github.event.issue.number }}
-          api_endpoint: https://api.rsolv-staging.com
+          api_url: https://api.rsolv-staging.com
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
