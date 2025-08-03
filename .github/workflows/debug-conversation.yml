@@ -22,7 +22,7 @@ jobs:
           fetch-depth: 0
       
       - name: RSOLV AutoFix with Debug Logging
-        uses: RSOLV-dev/rsolv-action@v2.2.3
+        uses: RSOLV-dev/rsolv-action@v2.2.4
         with:
           api_key: ${{ secrets.RSOLV_API_KEY }}
           issue_number: ${{ inputs.issue_number }}
