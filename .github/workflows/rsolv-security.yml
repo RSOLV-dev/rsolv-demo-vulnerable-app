@@ -38,12 +38,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch full history for git operations
       
       - name: RSOLV AutoFix
         uses: RSOLV-dev/rsolv-action@v2
         with:
           api_key: ${{ secrets.RSOLV_API_KEY }}
           issue_number: ${{ github.event.issue.number }}
+          scan_mode: fix  # Explicitly set to fix mode
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RSOLV_API_URL: https://api.rsolv-staging.com
