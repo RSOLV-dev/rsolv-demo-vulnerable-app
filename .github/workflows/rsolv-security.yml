@@ -32,6 +32,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RSOLV_API_URL: https://api.rsolv-staging.com
+          RSOLV_DEBUG: 'true'  # Enable verbose logging to debug Claude responses
 
   autofix:
     if: github.event_name == 'issues' && github.event.label.name == 'rsolv:automate'
@@ -52,3 +53,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RSOLV_API_URL: https://api.rsolv-staging.com
+          RSOLV_DEBUG: 'true'  # Enable verbose logging to debug Claude responses
