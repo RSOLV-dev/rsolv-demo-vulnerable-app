@@ -20,13 +20,13 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: RSOLV Security Scan
-        uses: RSOLV-dev/rsolv-action@v1.0.0-prod
+        uses: RSOLV-dev/rsolv-action@v2
         with:
           api_key: ${{ secrets.RSOLV_API_KEY }}
           scan_mode: scan
-          api_url: https://api.rsolv-staging.com
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RSOLV_API_URL: https://api.rsolv-staging.com
 
   autofix:
     if: github.event_name == 'issues' && github.event.label.name == 'rsolv:automate'
@@ -35,10 +35,10 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: RSOLV AutoFix
-        uses: RSOLV-dev/rsolv-action@v1.0.0-prod
+        uses: RSOLV-dev/rsolv-action@v2
         with:
           api_key: ${{ secrets.RSOLV_API_KEY }}
           issue_number: ${{ github.event.issue.number }}
-          api_url: https://api.rsolv-staging.com
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RSOLV_API_URL: https://api.rsolv-staging.com
