@@ -48,6 +48,7 @@ jobs:
           issue_number: ${{ github.event.issue.number }}
           scan_mode: fix  # Explicitly set to fix mode
           use_git_based_editing: 'true'  # Re-enable git-based editing with fixed workspace access
+          max_issues: '1'  # Process only the triggered issue
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RSOLV_API_URL: https://api.rsolv-staging.com
