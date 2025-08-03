@@ -12,6 +12,11 @@ on:
   issues:
     types: [labeled]
 
+permissions:
+  issues: write
+  contents: read
+  pull-requests: write
+
 jobs:
   security-scan:
     if: github.event_name != 'issues'
