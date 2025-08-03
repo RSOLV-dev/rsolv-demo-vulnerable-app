@@ -21,25 +21,23 @@ jobs:
         with:
           fetch-depth: 0
       
-      - name: RSOLV AutoFix with Structured Phases
-        uses: dylanfitzgerald/RSOLV-action@v2.2.1
+      - name: RSOLV AutoFix with Structured Phases v2.2.1
+        uses: RSOLV-dev/rsolv-action@v2.2.1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          linear_api_key: ${{ secrets.LINEAR_API_KEY }}
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          openrouter_api_key: ${{ secrets.OPENROUTER_API_KEY }}
-          openai_api_key: ${{ secrets.OPENAI_API_KEY }}
-          rsolv_api_key: ${{ secrets.RSOLV_API_KEY }}
+          api_key: ${{ secrets.RSOLV_API_KEY }}
           issue_number: ${{ inputs.issue_number }}
           scan_mode: fix
-          auto_fix: true
-          auto_pr: true
-          use_vended_credentials: 'true'
-          use_claude_code: 'true'
           use_git_based_editing: 'true'
-          # use_structured_phases is now true by default in v2.2.1
-          verbose_logging: 'true'
-          enhanced_context: 'true'
-          ultra_think: 'true'
-          test_generation: 'true'
-          test_validation: 'true'
+          # use_structured_phases defaults to true in v2.2.1
+          # Explicitly set to true to be clear
+          use_structured_phases: 'true'
+          enable_enhanced_context: 'true'
+          max_issues: '1'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          LINEAR_API_KEY: ${{ secrets.LINEAR_API_KEY }}
+          RSOLV_API_URL: https://api.rsolv-staging.com
+          RSOLV_DEBUG: 'true'
