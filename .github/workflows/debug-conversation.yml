@@ -1,0 +1,52 @@
+name: Debug Claude Conversation
+
+on:
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: 'Issue number to fix'
+        required: true
+        type: string
+
+permissions:
+  issues: write
+  contents: write
+  pull-requests: write
+
+jobs:
+  debug-autofix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: RSOLV AutoFix with Debug Logging
+        uses: RSOLV-dev/rsolv-action@v2.2.3
+        with:
+          api_key: ${{ secrets.RSOLV_API_KEY }}
+          issue_number: ${{ inputs.issue_number }}
+          scan_mode: fix
+          enable_enhanced_context: 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          LINEAR_API_KEY: ${{ secrets.LINEAR_API_KEY }}
+          RSOLV_API_URL: https://api.rsolv-staging.com
+          RSOLV_DEBUG: 'true'
+          # ⚠️  SECURITY WARNING: Only enable for debugging!
+          # This will expose conversation details in logs
+          RSOLV_DEBUG_CONVERSATION: 'true'
+      
+      # Archive logs for analysis
+      - name: Upload Debug Logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug-conversation-logs
+          path: |
+            **/*.log
+            **/claude-code-*.json
+          retention-days: 1
