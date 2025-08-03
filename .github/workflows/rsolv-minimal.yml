@@ -1,4 +1,4 @@
-name: Test Structured Phases v2.2.2
+name: RSOLV Minimal Config
 
 on:
   workflow_dispatch:
@@ -14,26 +14,20 @@ permissions:
   pull-requests: write
 
 jobs:
-  test-autofix:
+  autofix:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       
-      - name: RSOLV AutoFix with Structured Phases v2.2.2
+      - name: RSOLV AutoFix with Minimal Config
         uses: RSOLV-dev/rsolv-action@v2.2.2
         with:
           api_key: ${{ secrets.RSOLV_API_KEY }}
           issue_number: ${{ inputs.issue_number }}
           scan_mode: fix
-          # All of these now default to the right values:
-          # use_git_based_editing: defaults to 'true' (ADR-012)
-          # use_structured_phases: defaults to 'true' (ADR-019)
-          # enable_ast_validation: defaults to 'true'
-          # max_issues: defaults to '1' when issue_number is provided
-          
-          # Only enable_enhanced_context needs to be set (defaults to 'false')
+          # Only specify non-default values
           enable_enhanced_context: 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
