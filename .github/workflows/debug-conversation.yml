@@ -21,8 +21,8 @@ jobs:
         with:
           fetch-depth: 0
       
-      - name: RSOLV AutoFix Complete Solution
-        uses: RSOLV-dev/rsolv-action@v2.4.1
+      - name: RSOLV AutoFix with Educational PR
+        uses: RSOLV-dev/rsolv-action@v2.5.0
         with:
           api_key: ${{ secrets.RSOLV_API_KEY }}
           issue_number: ${{ inputs.issue_number }}
