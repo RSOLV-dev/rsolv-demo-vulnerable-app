@@ -1,0 +1,32 @@
+name: RSOLV AutoFix (No Validation)
+
+on:
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: 'Issue number to fix'
+        required: true
+        type: string
+
+permissions:
+  issues: write
+  contents: write
+  pull-requests: write
+
+jobs:
+  autofix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: RSOLV AutoFix
+        uses: RSOLV-dev/rsolv-action@main
+        with:
+          api_key: ${{ secrets.RSOLV_API_KEY }}
+          issue_number: ${{ inputs.issue_number }}
+          api_url: 'https://api.rsolv.dev'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RSOLV_SKIP_VALIDATION: 'true'
