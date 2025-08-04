@@ -21,8 +21,8 @@ jobs:
         with:
           fetch-depth: 0
       
-      - name: RSOLV AutoFix with CLI Adapter + Vended Creds
-        uses: RSOLV-dev/rsolv-action@v2.3.1
+      - name: RSOLV AutoFix with CLI + Vended Credentials
+        uses: RSOLV-dev/rsolv-action@v2.3.2
         with:
           api_key: ${{ secrets.RSOLV_API_KEY }}
           issue_number: ${{ inputs.issue_number }}
