@@ -28,6 +28,6 @@ jobs:
         with:
           api_key: ${{ secrets.RSOLV_API_KEY }}
           issue_number: ${{ inputs.issue_number || github.event.issue.number }}
-          api_url: 'https://api.rsolv.ai'
+          api_url: 'https://api.rsolv-staging.com'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
