@@ -21,8 +21,8 @@ jobs:
         with:
           fetch-depth: 0
       
-      - name: RSOLV AutoFix with CLI Adapter
-        uses: RSOLV-dev/rsolv-action@v2.3.0
+      - name: RSOLV AutoFix with CLI Adapter + Vended Creds
+        uses: RSOLV-dev/rsolv-action@v2.3.1
         with:
           api_key: ${{ secrets.RSOLV_API_KEY }}
           issue_number: ${{ inputs.issue_number }}
@@ -30,10 +30,7 @@ jobs:
           enable_enhanced_context: 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          LINEAR_API_KEY: ${{ secrets.LINEAR_API_KEY }}
+          # No need for ANTHROPIC_API_KEY - using vended credentials via RSOLV_API_KEY
           RSOLV_API_URL: https://api.rsolv-staging.com
           RSOLV_DEBUG: 'true'
           # ⚠️  SECURITY WARNING: Only enable for debugging!
